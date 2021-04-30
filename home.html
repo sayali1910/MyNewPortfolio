@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Page Title</title>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+                <link rel="preconnect" href="https://fonts.gstatic.com">
+                <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Lobster&family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+                <!--Animation-->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/metro/4.4.3/js/metro.min.js" integrity="sha512-/Ix/SVCN0erpULzS6CwAa0lliU1jZpw2eyJbn5+3U3NQczMSc39SHbLap2/gcO5rT8z6mHnDF4Nnsxt2U9RjfA==" crossorigin="anonymous"></script>
+                <style>
+                        .button{
+                                display: block;
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 50px;
+                                background-color: rgba(0, 0, 0, 0.6);
+                                box-sizing: border-box;
+                                color: white;
+                        }
+
+                        .button[slot="hotspot-hand"]{
+                                background-color: rgba(235, 45, 45, 0.65);
+                        }
+
+                        .button[slot="hotspot-foot"]:not([data-visible]) {
+                                background-color: rgba(45, 235, 235, 0.65);
+                                
+                        }
+                        .button[slot="hotspot-visor"]:not([data-visible]) {
+                                background-color: rgba(140, 235, 45, 0.65);
+                                
+                        }
+                        .button[slot="hotspot-car"]:not([data-visible]) {
+                                background-color: rgba(0, 0, 0, 0.6);
+                                
+                        }
+                        #annotation{
+                                
+                                position: absolute;
+                                transform: translate(10px, 10px);
+                                border-radius: 10px;
+                                padding: 10px;
+
+                        }
+                        model-viewer{
+                                width: 100%;
+                                height:100vh;
+                        }
+                        
+                        .preloader{
+                                position: fixed;
+                                top:0;
+                                width: 100%;
+                                height: 100vh;
+                                background-color:#333333;
+                                align-items: center;
+                                z-index: 9999;
+                        }
+                        .preloader.complete{
+                                opacity: 0;
+                                visibility: hidden;
+                        }
+                        .loader {
+                                position: fixed;
+                                left: 0px;
+                                top: 0px;
+                                width: 100%;
+                                height: 100%;
+                                z-index: 9999;
+                                background: url('assets/load2.gif') 50% 50% no-repeat #333333;
+                                opacity: .8;
+                        }
+                </style>
+                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+                <script type="text/javascript">
+                        $(window).on('load', function(){
+                                setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+                        });
+                        
+                        function removeLoader(){
+                        $( ".loader" ).fadeOut(500, function() {
+                        // fadeOut complete. Remove the loading div
+                        $( ".loader" ).remove(); //makes page more lightweight 
+                        });  
+                        }
+                        
+                </script>
+        </head>
+        <body>
+        <div class="loader"></div>
+                
+        <model-viewer
+                class="imp" 
+                src="scene.glb" 
+                alt="A 3D model of an astronaut" 
+                camera-controls
+                camera-orbit="45deg 55deg 2.0m"
+                style="background-color:grey;"
+                
+        >
+                <a class="btn button" href="about.html" slot="hotspot-visor" data-position="0.5 -1 2.5" >
+                        1
+                        <div id="annotation" style="width: 120px; background-color: rgba(140, 235, 45, 0.65);">About Me</div>
+                </a>
+                <a class="btn button" href="project.html" slot="hotspot-hand" data-position="-2 -0.5 1" >
+                        2
+                        <div id="annotation" style="width: 120px; background-color: rgba(235, 45, 45, 0.65);">My Work</div>
+                </a>
+                <a class="btn button" href="collection.html" slot="hotspot-foot" data-position="0 -0.5 -1"  >
+                        3
+                        <div id="annotation" style="width: 120px; background-color: rgba(45, 235, 235, 0.65);">My Collection</div>
+                </a>
+                <a class="btn button" href="contact.html" slot="hotspot-car" data-position="3 -1 0" >
+                        4
+                        <div id="annotation" style="width: 120px; background-color: rgba(0, 0, 0, 0.6);">Contact Me</div>
+                </a>
+        
+        </model-viewer>
+                <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+        </body>
+</html>
